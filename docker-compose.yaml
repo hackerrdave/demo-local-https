@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  nginx:
+    image: nginx:latest
+    ports: 
+      - 443:443
+    volumes:
+      - ./certs/:/etc/nginx/ssl
+      - ./conf/:/etc/nginx/conf.d
+  http-server:
+    image: node:15-slim
+    command: bash -c "npm install -g http-server && http-server -a 0.0.0.0"
+    ports:
+      - 8080
